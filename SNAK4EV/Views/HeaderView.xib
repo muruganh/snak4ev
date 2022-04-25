@@ -23,23 +23,23 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9G8-1W-mgP">
                     <rect key="frame" x="0.0" y="0.0" width="430" height="88"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-BG-wWC">
-                            <rect key="frame" x="18" y="32" width="24" height="24"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.backward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-BG-wWC">
+                            <rect key="frame" x="18" y="43" width="24" height="21.5"/>
+                            <color key="tintColor" red="1" green="0.14901960780000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="ZoU-bm-hap"/>
                                 <constraint firstAttribute="height" constant="24" id="gRc-8r-pfz"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxx-Wl-Od0">
-                            <rect key="frame" x="10" y="24" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="74" height="88"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="H1h-oB-Bow"/>
-                                <constraint firstAttribute="width" constant="40" id="m3p-5l-ufL"/>
+                                <constraint firstAttribute="width" constant="74" id="H7W-JE-GZi"/>
                             </constraints>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmj-BO-f15">
-                            <rect key="frame" x="193.5" y="34" width="43.5" height="20"/>
+                            <rect key="frame" x="193.5" y="44" width="43.5" height="20"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
@@ -47,12 +47,13 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="nxx-Wl-Od0" firstAttribute="centerX" secondItem="VBk-BG-wWC" secondAttribute="centerX" id="0wu-E9-g0k"/>
-                        <constraint firstItem="nxx-Wl-Od0" firstAttribute="centerY" secondItem="VBk-BG-wWC" secondAttribute="centerY" id="fJK-kk-Cc9"/>
+                        <constraint firstItem="nxx-Wl-Od0" firstAttribute="leading" secondItem="9G8-1W-mgP" secondAttribute="leading" id="BvM-uw-Fnz"/>
+                        <constraint firstItem="Fmj-BO-f15" firstAttribute="centerY" secondItem="VBk-BG-wWC" secondAttribute="centerY" id="Cqw-5k-nDZ"/>
+                        <constraint firstItem="nxx-Wl-Od0" firstAttribute="top" secondItem="9G8-1W-mgP" secondAttribute="top" id="GbH-da-lcc"/>
                         <constraint firstItem="Fmj-BO-f15" firstAttribute="centerX" secondItem="9G8-1W-mgP" secondAttribute="centerX" id="gKV-Vk-P5G"/>
-                        <constraint firstItem="Fmj-BO-f15" firstAttribute="centerY" secondItem="9G8-1W-mgP" secondAttribute="centerY" id="i4h-zZ-2zM"/>
                         <constraint firstItem="VBk-BG-wWC" firstAttribute="leading" secondItem="9G8-1W-mgP" secondAttribute="leading" constant="18" id="ue7-Ap-Ika"/>
-                        <constraint firstItem="VBk-BG-wWC" firstAttribute="centerY" secondItem="9G8-1W-mgP" secondAttribute="centerY" id="wdM-pG-IH6"/>
+                        <constraint firstItem="VBk-BG-wWC" firstAttribute="centerY" secondItem="9G8-1W-mgP" secondAttribute="centerY" constant="10" id="wdM-pG-IH6"/>
+                        <constraint firstAttribute="bottom" secondItem="nxx-Wl-Od0" secondAttribute="bottom" id="zKL-Kb-6sh"/>
                     </constraints>
                 </view>
             </subviews>
@@ -65,10 +66,11 @@
                 <constraint firstItem="9G8-1W-mgP" firstAttribute="leading" secondItem="nCP-JS-vWQ" secondAttribute="leading" id="fdh-A5-hdY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="149" y="565"/>
+            <point key="canvasLocation" x="147.82608695652175" y="564.50892857142856"/>
         </view>
     </objects>
     <resources>
+        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
