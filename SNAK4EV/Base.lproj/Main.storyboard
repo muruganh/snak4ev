@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z8j-Nw-vyK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DMC-Ne-Hr3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -63,6 +63,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCj-1Z-ggn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="522" y="-639"/>
+        </scene>
+        <!--Pop Up View Controller-->
+        <scene sceneID="gsK-YX-rxV">
+            <objects>
+                <viewController id="oFU-81-s92" customClass="popUpViewController" customModule="SNAK4EV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="euQ-lr-No7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFs-2p-jmm" customClass="popUpView" customModule="SNAK4EV" customModuleProvider="target">
+                                <rect key="frame" x="20" y="612" width="374" height="230"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="Nqc-IF-RCd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Aow-Kv-uZQ"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Aow-Kv-uZQ" firstAttribute="bottom" secondItem="uFs-2p-jmm" secondAttribute="bottom" constant="20" id="08r-rN-f9x"/>
+                            <constraint firstItem="uFs-2p-jmm" firstAttribute="leading" secondItem="Aow-Kv-uZQ" secondAttribute="leading" constant="20" id="Iby-Ds-E2c"/>
+                            <constraint firstItem="Aow-Kv-uZQ" firstAttribute="trailing" secondItem="uFs-2p-jmm" secondAttribute="trailing" constant="20" id="n8L-U8-IQL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="popView" destination="uFs-2p-jmm" id="28l-tZ-Asg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KFK-Cd-2EC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143" y="1763"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="mi7-dL-7SL">
@@ -313,6 +345,21 @@
             </objects>
             <point key="canvasLocation" x="2272" y="185"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="LTz-zd-FBm">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="7Xc-ze-8yf" customClass="MapViewController" customModule="SNAK4EV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rRq-u2-Bhg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ijp-zg-pQk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uka-d3-crm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2456" y="1225"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="4MV-Ue-5o1">
             <objects>
@@ -453,7 +500,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="okp-CV-slM" firstAttribute="centerY" secondItem="w8u-Y5-lr2" secondAttribute="centerY" id="0Tv-ou-pGt"/>
                                     <constraint firstAttribute="height" constant="145" id="4hd-02-D7a"/>
@@ -495,6 +542,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="JSE-eM-GWh"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyZ-Qv-3Ws">
                                                         <rect key="frame" x="0.0" y="55.5" width="100" height="48.5"/>
@@ -507,6 +557,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="6vs-LK-ArN"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhW-aS-EJQ">
                                                         <rect key="frame" x="0.0" y="111" width="100" height="49"/>
@@ -519,6 +572,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="637-ps-OCr"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -540,6 +596,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="a33-bV-FWU"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUg-VK-t0s">
                                                         <rect key="frame" x="0.0" y="55.5" width="100" height="48.5"/>
@@ -552,6 +611,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="eey-2M-cVA"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3d-OD-Mcw">
                                                         <rect key="frame" x="0.0" y="111" width="100" height="49"/>
@@ -564,6 +626,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="amountbtnClicked:" destination="zN9-7a-IsF" eventType="touchUpInside" id="WB0-m6-kKe"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -649,6 +714,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btn1000" destination="PhW-aS-EJQ" id="iJf-Lw-kNu"/>
+                        <outlet property="btn200" destination="lax-To-0TH" id="9sl-6j-fqQ"/>
+                        <outlet property="btn2000" destination="z3d-OD-Mcw" id="HCp-Ou-aGh"/>
+                        <outlet property="btn300" destination="AAT-xP-K3R" id="tv1-Fr-qum"/>
+                        <outlet property="btn400" destination="cyZ-Qv-3Ws" id="Rfh-nu-ett"/>
+                        <outlet property="btn500" destination="iUg-VK-t0s" id="MG4-1L-BKt"/>
                         <outlet property="greyView" destination="3Bh-Ii-iBw" id="opI-sk-a5K"/>
                         <outlet property="headerView" destination="Qr3-Nc-MYP" id="beq-io-fMK"/>
                         <outlet property="lblMoney" destination="hoI-Vh-NNO" id="tMG-H9-vf3"/>
@@ -658,6 +729,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQu-Fm-ysk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2230.434782608696" y="-520.3125"/>
+        </scene>
+        <!--Charging Monitoring View Controller-->
+        <scene sceneID="4Qd-3R-xk9">
+            <objects>
+                <viewController storyboardIdentifier="ChargingMonitoringViewController" id="5oz-T2-D3Z" customClass="ChargingMonitoringViewController" customModule="SNAK4EV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tcn-Bh-fBj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-Fo-c29" customClass="HeaderView" customModule="SNAK4EV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lFX-vk-zLs"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A45-pK-0zn">
+                                <rect key="frame" x="20" y="437.5" width="374" height="21.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZdY-mD-F3R"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A45-pK-0zn" firstAttribute="centerY" secondItem="tcn-Bh-fBj" secondAttribute="centerY" id="CcV-sf-4cD"/>
+                            <constraint firstItem="A45-pK-0zn" firstAttribute="centerX" secondItem="tcn-Bh-fBj" secondAttribute="centerX" id="EKB-KW-3EZ"/>
+                            <constraint firstItem="UhD-Fo-c29" firstAttribute="leading" secondItem="ZdY-mD-F3R" secondAttribute="leading" id="QtK-IS-2NU"/>
+                            <constraint firstItem="A45-pK-0zn" firstAttribute="leading" secondItem="ZdY-mD-F3R" secondAttribute="leading" constant="20" id="T6b-KB-ZK1"/>
+                            <constraint firstItem="UhD-Fo-c29" firstAttribute="top" secondItem="ZdY-mD-F3R" secondAttribute="top" id="ngk-rL-rW4"/>
+                            <constraint firstItem="ZdY-mD-F3R" firstAttribute="trailing" secondItem="A45-pK-0zn" secondAttribute="trailing" constant="20" id="pWb-6A-Fey"/>
+                            <constraint firstItem="ZdY-mD-F3R" firstAttribute="trailing" secondItem="UhD-Fo-c29" secondAttribute="trailing" id="zrf-Tt-pfB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerView" destination="UhD-Fo-c29" id="WiL-mB-zA1"/>
+                        <outlet property="lblData" destination="A45-pK-0zn" id="GX2-Kq-VfA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TmE-ZI-901" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3441" y="-338"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="pWR-Jz-bYS">
@@ -1098,6 +1212,68 @@
             </objects>
             <point key="canvasLocation" x="-100.00000000000001" y="712.5"/>
         </scene>
+        <!--Connector Selection View Controller-->
+        <scene sceneID="TQt-4y-cFF">
+            <objects>
+                <viewController id="1QR-ks-Vhp" customClass="connectorSelectionViewController" customModule="SNAK4EV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="prR-X4-FcE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JL-Xn-yd1" customClass="connectorHeaderView" customModule="SNAK4EV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="nO5-MW-ncd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="30x-TK-iwm"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="30x-TK-iwm" firstAttribute="trailing" secondItem="8JL-Xn-yd1" secondAttribute="trailing" id="3f4-Kl-YyT"/>
+                            <constraint firstItem="8JL-Xn-yd1" firstAttribute="top" secondItem="30x-TK-iwm" secondAttribute="top" id="dZG-cw-1MH"/>
+                            <constraint firstItem="8JL-Xn-yd1" firstAttribute="leading" secondItem="30x-TK-iwm" secondAttribute="leading" id="eXm-Ez-Owx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="connectorheaderView" destination="8JL-Xn-yd1" id="zU8-8U-WVF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZRa-jO-WbM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1165" y="1763"/>
+        </scene>
+        <!--Gif View Controller-->
+        <scene sceneID="pja-VN-11i">
+            <objects>
+                <viewController id="DMC-Ne-Hr3" customClass="GifViewController" customModule="SNAK4EV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TPI-Jm-xky">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xvf-sN-BOk" customClass="gifView" customModule="SNAK4EV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6P8-wv-L5y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Xvf-sN-BOk" firstAttribute="leading" secondItem="6P8-wv-L5y" secondAttribute="leading" id="58Q-Oy-sig"/>
+                            <constraint firstItem="6P8-wv-L5y" firstAttribute="bottom" secondItem="Xvf-sN-BOk" secondAttribute="bottom" id="6au-Nk-Mia"/>
+                            <constraint firstItem="6P8-wv-L5y" firstAttribute="trailing" secondItem="Xvf-sN-BOk" secondAttribute="trailing" id="joc-ZD-04l"/>
+                            <constraint firstItem="Xvf-sN-BOk" firstAttribute="top" secondItem="6P8-wv-L5y" secondAttribute="top" id="mhi-WZ-wW2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gifView" destination="Xvf-sN-BOk" id="AlB-fk-6Iq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dd5-tg-Ae2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1123" y="2526"/>
+        </scene>
     </scenes>
     <resources>
         <image name="aboutLogo" width="500" height="198"/>
@@ -1120,6 +1296,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

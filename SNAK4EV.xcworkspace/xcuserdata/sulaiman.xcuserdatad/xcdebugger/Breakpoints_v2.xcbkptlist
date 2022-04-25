@@ -20,5 +20,178 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Controller/MapViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "MapViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C - bf7731be4f19e7a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNAK4EV.MapViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; SNAK4EV.MapViewController"
+                  moduleName = "SNAK4EV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sulaiman/Documents/Sulaiman/SNAK4EV%202/SNAK4EV/Controller/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C - 2cfd70b6bd499e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNAK4EV.MapViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; SNAK4EV.MapViewController"
+                  moduleName = "SNAK4EV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sulaiman/Documents/Sulaiman/SNAK4EV%202/SNAK4EV/Controller/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C - c13cfd1319e1dbe8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNAK4EV.MapViewController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;SNAK4EV.MapViewController&gt;"
+                  moduleName = "SNAK4EV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sulaiman/Documents/Sulaiman/SNAK4EV%202/SNAK4EV/Controller/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C - 7b0ce8726f401555"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNAK4EV.MapViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;SNAK4EV.MapViewController&gt;"
+                  moduleName = "SNAK4EV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sulaiman/Documents/Sulaiman/SNAK4EV%202/SNAK4EV/Controller/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "E6195BAD-BD64-4D75-B063-F7115689AC0C - 5bb4812f3bc7a70c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SNAK4EV.MapViewController.__deallocating_deinit"
+                  moduleName = "SNAK4EV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sulaiman/Documents/Sulaiman/SNAK4EV%202/SNAK4EV/Controller/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "453F46A3-C857-43BC-9FD5-E795764E99B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Controller/WalletViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "addSelectAmount(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38539FF1-1F6F-4328-BB9B-9BAF7A9F553D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Controller/WalletViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "addSelectAmount(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC8C8E93-A9C7-45EA-9E7C-E7FE98BF87E6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Controller/WalletViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "amountbtnClicked(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF15E6B3-78A8-40F2-B82B-C0847D174553"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Controller/WalletViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "showPaymentForm(paymentdetail:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BCEE38D9-937C-4EBF-BCE5-383E05AE6379"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SNAK4EV/Views/connectorHeaderView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "loadViewFromNib()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

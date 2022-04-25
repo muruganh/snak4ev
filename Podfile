@@ -15,7 +15,8 @@ target 'SNAK4EV' do
   pod 'SwiftMessages'
   pod 'Alamofire', '~> 4.4'
   pod 'SideMenu'
-
+  pod 'GoogleMaps', '~>5.2.0'
+pod 'razorpay-pod', '~>1.1.1'
   target 'SNAK4EVTests' do
     inherit! :search_paths
     # Pods for testing

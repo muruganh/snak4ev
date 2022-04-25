@@ -9,7 +9,7 @@ import UIKit
 
 class MenuViewController: BaseViewController {
     
-    var menuList = ["", "QR Scan", "My Account", "Update Wallet", "Charging Monitoring", "About", "Sign Out"]
+    var menuList = [ "", "QR Scan", "My Account", "Update Wallet", "Charging Monitoring", "About", "Sign Out"  ]
    var menulistIcon = UIImage(named: "menu1")
 
     override func viewDidLoad() {

@@ -106,6 +106,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - razorpay-pod (1.1.19)
   - SideMenu (6.5.0)
   - SwiftMessages (9.0.5):
     - SwiftMessages/App (= 9.0.5)
@@ -116,9 +117,11 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - GoogleMaps
+  - GoogleMaps (~> 5.2.0)
   - GooglePlaces
   - IQKeyboardManagerSwift
   - JTMaterialSpinner (~> 3.0)
+  - razorpay-pod (~> 1.1.1)
   - SideMenu
   - SwiftMessages
 
@@ -140,6 +143,7 @@ SPEC REPOS:
     - JTMaterialSpinner
     - nanopb
     - PromisesObjC
+    - razorpay-pod
     - SideMenu
     - SwiftMessages
 
@@ -160,9 +164,10 @@ SPEC CHECKSUMS:
   JTMaterialSpinner: 28a0444186b6b2df4206a77d12f7c9dcbe604958
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  razorpay-pod: d34454a20429105b94afc700734cfba38b95eea4
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftMessages: 9cca50659fa22bb523b4dd2a958d4442e843a354
 
-PODFILE CHECKSUM: 1332a877869c8f7d4cc03da251142b4a882f5f96
+PODFILE CHECKSUM: bb5d861587c8f8c3fe766b39871ac93375c723f5
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
