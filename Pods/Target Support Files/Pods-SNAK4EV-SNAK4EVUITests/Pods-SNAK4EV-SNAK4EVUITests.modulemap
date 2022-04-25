@@ -1,0 +1,6 @@
+framework module Pods_SNAK4EV_SNAK4EVUITests {
+  umbrella header "Pods-SNAK4EV-SNAK4EVUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
