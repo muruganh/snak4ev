@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zot-M8-env">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z8j-Nw-vyK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -791,7 +791,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tB-BP-YDS">
                                 <rect key="frame" x="20" y="106" width="374" height="170"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aboutLogo" translatesAutoresizingMaskIntoConstraints="NO" id="z7E-wH-cSX">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about" translatesAutoresizingMaskIntoConstraints="NO" id="z7E-wH-cSX">
                                         <rect key="frame" x="127" y="30" width="120" height="80"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
@@ -1262,7 +1262,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="aboutLogo" width="500" height="198"/>
+        <image name="about" width="969" height="396"/>
         <image name="loginLogo" width="1118" height="648"/>
         <image name="menu1" width="36" height="36"/>
         <image name="menuLogo" width="128" height="122"/>
