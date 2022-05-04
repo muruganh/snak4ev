@@ -13,24 +13,20 @@ var accessToken = UserDefaults.standard.object(forKey: "accessToken") as! String
 public enum RequestMethod : String
 {
     
-    case logIn = "signin.php"
+    case otpGenerate = "OtpGeneration/"
     
-    case forgotPwdApi = "forgot-password.php"
+    case otpAuthenticate = "OtpAuthentication/"
     
-    case signupApi = "signup.php"
+    case getTokenApi = "GetToken/"
     
-    case home = "home.php"
+    case getWalletBalanceApi = "GetWalletBalance/"
     
-    case recentlyAdded = "video_list.php"
+    case updateWalletApi = "LoadWallet/"
     
-    case changePwdApi = "change_password.php"
+    case profileUpdateApi = "CustomerUpdate/"
     
-    case profileUpdateApi = "profile_update.php"
+    case getProfileApi = "GetCustomer/"
     
-    case eventApi = "event.php"
-    
-    case contractApi = "new_contract_video.php"
-    
-    case profileApi = "profile.php"
+    case getChargerDetailsApi = "GetChargerQRCode/"
 
 }

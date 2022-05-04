@@ -8,13 +8,9 @@
 import UIKit
 
 class AboutViewController: BaseViewController {
-
-    @IBOutlet weak var headerView: HeaderView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        headerView.lblTitle.text = "ABOUT"
         
     }
     

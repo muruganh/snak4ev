@@ -14,13 +14,14 @@ class LoginVM: NSObject {
     
     var loginValidation: ((String) -> Void)?
     var forgotPwdValidation: ((String) -> Void)?
-    var loginSuccess: (() -> Void)?
+    var loginSuccess: ((OTPGenerateModel) -> Void)?
     var forgotPwdSuccess: ((String) -> Void)?
     var signupValidation: ((String) -> Void)?
     var signupSuccess: ((String) -> Void)?
     var changePwdValidation: ((String) -> Void)?
     var changePwdSuccess: ((String) -> Void)?
     //var getProfileData: ((ProfileDetails) -> Void)?
+    var otpSuccess: ((OTPAuthenticateModel) -> Void)?
     
     // MARK: - Init
     override init() {
@@ -32,47 +33,42 @@ class LoginVM: NSObject {
         deviceDetails = ["platform": DeviceManager.platform, "deviceId":DeviceManager.deviceId, "os":DeviceManager.os, "version":DeviceManager.version, "latitude":"", "longitude":"", "model":DeviceManager.deviceModel, "token":Globals.shared.fcmToken,"device_type":"1"]
     }
     
-    func loginRequestClick(userName: String?, password: String?, vc: BaseViewController) {
+    func loginRequestClick(mobile: String?, vc: BaseViewController) {
         Globals.shared.shareViewController = vc
-        guard userName != "" else {
-            self.loginValidation?(RegisterMailIdError)
+        guard mobile != "" && mobile?.count == 10 else {
+            DispatchQueue.main.async {
+                self.loginValidation?(MobileError)
+            }
             return
         }
-        guard (password != "" && password?.count ?? 0 >= 4) else {
-            self.loginValidation?(PasswordError)
-            return
-        }
-        let params = ["email":userName ?? "","password":password ?? "","device_details":self.deviceDetails!] as [String : Any]
+        let params = ["mobileno": mobile ?? "", "mobcountrycode": "91"] as [String : Any]
         self.loginRequest(param: params)
     }
     
     func loginRequest(param: [String : Any]){
-        APIRequestManager.sharedInstance.login(param:param as Dictionary<String, AnyObject>) { (success, loginModel) in
+        APIRequestManager.sharedInstance.otpGenerate(param:param as Dictionary<String, AnyObject>) { (success, otpGenerateModel) in
             if success
             {
-                guard successCode ~= (loginModel?.responseCode ?? 0) else{
-                    self.loginValidation?(loginModel?.message ?? "")
+                guard otpGenerateModel?.status == "success" else{
+                    self.loginValidation?(otpGenerateModel?.message ?? "")
                     return
                 }
-                self.loginSuccess?()
+                self.loginSuccess?(otpGenerateModel!)
             }
         }
     }
     
-    func forgotPwdRequestClick(email: String?, vc: BaseViewController) {
-        Globals.shared.shareViewController = vc
-        guard email != "" else {
-            self.loginValidation?(RegisterMailIdError)
-            return
+    func otpAuthenticateRequest(param: [String : Any]){
+        APIRequestManager.sharedInstance.otpAuthenticate(param:param as Dictionary<String, AnyObject>) { (success, otpAuthenticateModel) in
+            if success
+            {
+                guard otpAuthenticateModel?.status == "success" else{
+                    self.loginValidation?(otpAuthenticateModel?.message ?? "")
+                    return
+                }
+                self.otpSuccess?(otpAuthenticateModel!)
+            }
         }
-        
-        let params = ["email": email ?? ""] as [String : Any]
-        self.forgotPwdRequest(param: params)
-    }
-    
-    
-    func forgotPwdRequest(param: [String : Any]){
-        
     }
     
     func signupRequestClick(firstName: String?, lastName: String?, email: String?, passsword: String?, cPasssword: String?, vc: BaseViewController) {

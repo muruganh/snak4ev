@@ -6,16 +6,48 @@
 //
 
 import UIKit
+import SideMenu
+import JTMaterialSpinner
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, LoaderStartStopDelegate {
+    
+    var spinnerView = JTMaterialSpinner()
+    @IBOutlet var headerView: HeaderView?
+    @IBOutlet var headerViewHeight: NSLayoutConstraint?
+    let API = APIRequestManager.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if headerView?.btnBack != nil{
+            headerView?.btnBack?.addTarget(self, action: #selector(btnMenu(_:)), for: .touchUpInside)
+            if Display.typeIsLike == .iphoneX{
+                headerViewHeight?.constant = 90
+            }else{
+                headerViewHeight?.constant = 70
+            }
+        }
 
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        API.loaderDelegate = self
+        Globals.shared.shareViewController = self
+    }
+    
 
+    @IBAction func btnMenu(_ sender: UIButton){
+        let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        let menu = SideMenuNavigationController(rootViewController: vc)
+        menu.leftSide = true
+        menu.menuWidth = 300
+        menu.presentationStyle = .menuSlideIn
+        // SideMenuNavigationController is a subclass of UINavigationController, so do any additional configuration
+        // of it here like setting its viewControllers. If you're using storyboards, you'll want to do something like:
+        // let menu = storyboard!.instantiateViewController(withIdentifier: "RightMenu") as! SideMenuNavigationController
+        present(menu, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -26,4 +58,33 @@ class BaseViewController: UIViewController {
     }
     */
 
+}
+
+extension BaseViewController{
+    func isStartLoading(isload: Bool) {
+        if isload{
+            if(!(Globals.shared.disableLoaderForSomeScreen)){
+                DispatchQueue.main.async {self.didBeginLoading()}
+            }
+        }else{
+            if(!(Globals.shared.disableLoaderForSomeScreen)){
+                DispatchQueue.main.async {self.didEndLoading()}
+            }
+        }
+    }
+    
+    open func didBeginLoading() {
+        spinnerView.frame = CGRect(x: (self.view.frame.size.width-50) / 2.0, y: (self.view.frame.size.height-50) / 2.0, width: 50, height: 50)
+        spinnerView.circleLayer.lineWidth = 2.0
+        spinnerView.circleLayer.strokeColor = UIColor.red.cgColor//App.AppTheme.Color.cgColor
+        spinnerView.animationDuration = 1.5
+        self.view.addSubview(spinnerView)
+        spinnerView.beginRefreshing()
+        self.view.isUserInteractionEnabled = false
+    }
+    
+    open func didEndLoading() {
+        spinnerView.endRefreshing()
+        self.view.isUserInteractionEnabled = true
+    }
 }

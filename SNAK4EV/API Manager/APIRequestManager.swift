@@ -13,35 +13,117 @@ class APIRequestManager {
     
     static let sharedInstance = APIRequestManager()
     
-    func login(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : LoginModel?) -> ())
+    var loaderDelegate: LoaderStartStopDelegate?
+    
+    func otpGenerate(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : OTPGenerateModel?) -> ())
     {
         Globals.shared.dontShowmessage = false
-        post(request: clientURLRequestPostMethod(path: RequestMethod.logIn.rawValue, params: param)) { (success, object) in
+        post(request: clientURLRequestPostMethod(path: RequestMethod.otpGenerate.rawValue, params: param)) { (success, object) in
             DispatchQueue.main.async(execute: { () -> Void in
                 if success {
-                    completion(true, LoginModel.convertData(data: object as! Data))
+                    completion(true, OTPGenerateModel.convertData(data: object as! Data))
                 }else{
-                    completion(false, LoginModel.convertData(data: object as! Data))
+                    completion(false, OTPGenerateModel.convertData(data: object as! Data))
                 }
             })
         }
     }
     
-//    func testget(completion : @escaping(_ success : Bool , _ jsonObject : TestGetModel?) -> ())
-//    {
-//
-//        let url = ""
-//
-//        get(request: clientURLRequestGetMethod(path: url)) { (success, object) in
-//            DispatchQueue.main.async(execute: { () -> Void in
-//                if success {
-//                    completion(true, TestGetModel.convertData(data: object as! Data))
-//                }else{
-//                    completion(false, TestGetModel.convertData(data: object as! Data))
-//                }
-//            })
-//        }
-//    }
+    func otpAuthenticate(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : OTPAuthenticateModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.otpAuthenticate.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, OTPAuthenticateModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, OTPAuthenticateModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func getWalletBalance(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : UpdateWalletModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.getWalletBalanceApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, UpdateWalletModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, UpdateWalletModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func updateWallet(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : UpdateWalletModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.updateWalletApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, UpdateWalletModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, UpdateWalletModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func profileUpdate(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : ProfileUpdateModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.profileUpdateApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, ProfileUpdateModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, ProfileUpdateModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func getProfile(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : ProfileModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.getProfileApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, ProfileModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, ProfileModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func getChargerDetails(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : ChargerModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.getChargerDetailsApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, ChargerModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, ChargerModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func getCountryList(completion : @escaping(_ jsonObject : CountryListModel?) -> ())
+    {
+        if let path = Bundle.main.path(forResource: "country", ofType: "json")
+        {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                completion(CountryListModel.convertData(data: data))
+            } catch{
+            }
+        }
+    }
     
     private func post(request: NSMutableURLRequest, completion: @escaping (_ success: Bool, _ object: AnyObject?) -> ()) {
         dataTask(request: request, method: "POST", completion: completion)
@@ -105,12 +187,12 @@ class APIRequestManager {
         }
         
         let request = NSMutableURLRequest(url: NSURL(string: strUrl)! as URL)
-        if(TokenDetails.tokenModel?.responseObject?.token != nil){
-            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
-            if PrintLog{
-                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
-            }
-        }
+//        if(TokenDetails.tokenModel?.responseObject?.token != nil){
+//            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
+//            if PrintLog{
+//                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
+//            }
+//        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONSerialization.data(withJSONObject: params as Any, options: [])
         return request
@@ -121,12 +203,12 @@ class APIRequestManager {
         print("Url:----->\(urlWithParams)")
         let urlStr  = urlWithParams.addingPercentEscapes(using: String.Encoding.utf8.rawValue)!
         let request = NSMutableURLRequest(url: NSURL(string: urlStr)! as URL)
-        if(TokenDetails.tokenModel?.responseObject?.token != nil){
-            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
-            if PrintLog{
-                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
-            }
-        }
+//        if(TokenDetails.tokenModel?.responseObject?.token != nil){
+//            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
+//            if PrintLog{
+//                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
+//            }
+//        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         //let request = NSMutableURLRequest(url: NSURL(string: urlStr)! as URL)
         return request
@@ -138,7 +220,7 @@ class APIRequestManager {
     
     private func dataTask(request: NSMutableURLRequest, method: String, completion: @escaping (_ success: Bool, _ object: AnyObject?) -> ()) {
         DispatchQueue.main.async {
-            //self.loaderDelegate?.Loader(isStart: true)
+            self.loaderDelegate?.isStartLoading(isload: true)
         }
         request.httpMethod = method
         
@@ -193,7 +275,7 @@ class APIRequestManager {
                     }
                     completion(true, data as AnyObject?)
                     DispatchQueue.main.async {
-                        //self.loaderDelegate?.Loader(isStart: false)
+                        self.loaderDelegate?.isStartLoading(isload: false)
                     }
                 }else
                 {

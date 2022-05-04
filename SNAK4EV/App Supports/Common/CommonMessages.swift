@@ -9,7 +9,7 @@ import Foundation
 
 let PasswordError = "Please enter password"
 
-let EmailError = "Please enter user email"
+let EmailError = "Please enter valid email"
 
 let TermsAndCondition = "Please check terms and condition"
 
@@ -48,5 +48,17 @@ let EnterConfirmPasswordMatch = "Password and confirm password didn't match"
 let EnterOldNewPasswordMatch = "Old password and New password didn't match"
 
 let SignupSuccessMessage = "Your account has been register successfully!"
+
+let MobileError = "Please enter valid mobile number"
+
+let CountryError = "Please choose country"
+
+let StateError = "Please choose state"
+
+let CityError = "Please choose city"
+
+let AddressError = "Please enter your address"
+
+let PostalCodeError = "Please enter valid postal code"
 
 

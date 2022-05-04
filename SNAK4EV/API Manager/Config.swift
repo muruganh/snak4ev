@@ -12,17 +12,23 @@ let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
 
 let isProduction = true
 
-let PrintLog: Bool = false
+let PrintLog: Bool = true
 
-let liveEnv = "https://buildinglatoday.com/"
+let liveEnv = "https://www.speedp.live/snak4ev/"
 
-let devEnv = "https://buildinglatoday.com/"
+let devEnv = "https://www.speedp.live/snak4ev/"
 
-let apiExtn = "api/"
+let baseURL = isProduction ? liveEnv : devEnv
 
-let baseURL = isProduction ? (liveEnv + apiExtn) : (devEnv + apiExtn)
+let googleAddressApiKey = "AIzaSyA0CiZZvu4LCQDBZ9PyP3nmH3DxlWd9m2c"
 
-let googleAddressApiKey = ""
+let googleProvideAPIKey = "AIzaSyA0CiZZvu4LCQDBZ9PyP3nmH3DxlWd9m2c"
+
+let razorDevKey = "rzp_test_UNIYnViM67Qrcr"
+
+let razorLiveKey = "rzp_live_lC8JXJGsIBVPk5"
+
+let razorApiKey = isProduction ? razorLiveKey : razorDevKey
 
 let NameLength: Int = 15
 

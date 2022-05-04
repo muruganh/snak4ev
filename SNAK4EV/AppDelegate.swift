@@ -13,29 +13,42 @@ import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    final var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
-        GMSServices.provideAPIKey("AIzaSyA0CiZZvu4LCQDBZ9PyP3nmH3DxlWd9m2c")
+        GMSServices.provideAPIKey(googleProvideAPIKey)
         GMSServices.openSourceLicenseInfo()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.makeKeyAndVisible()
+        self.setRootVC()
         return true
     }
+    
+    
+}
 
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+extension AppDelegate{
+    func setRootVC(){
+        let isValidUser = UserDetails.UserDetailModel?.customerid != nil ? true : false
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController:UINavigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        if(Connectivity.isConnectedToInternet){
+            if isValidUser{
+                let rootViewController:UIViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                navigationController.viewControllers = [rootViewController]
+            }else{
+                let rootViewController:UIViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                navigationController.viewControllers = [rootViewController]
+            }
+        }else{
+            let rootViewController:UIViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            navigationController.viewControllers = [rootViewController]
+        }
+        self.window?.rootViewController = navigationController
     }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
-
 }
 

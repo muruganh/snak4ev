@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ChargingMonitoringViewController: UIViewController {
-    @IBOutlet weak var headerView : HeaderView!
+class ChargingMonitoringViewController: BaseViewController {
     @IBOutlet weak var lblData : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView.lblTitle.text = "CHARGE MONITORING"
-        lblData.isHidden = true
+        headerView?.lblTitle.text = "CHARGE MONITORING"
+        //lblData.isHidden = true
         // Do any additional setup after loading the view.
     }
     

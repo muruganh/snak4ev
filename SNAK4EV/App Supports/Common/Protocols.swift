@@ -11,3 +11,7 @@ import UIKit
 protocol ImageUpdateDelegate {
     func updateImage(isSuccess: Bool, imageUrl: String)
 }
+
+protocol LoaderStartStopDelegate: AnyObject {
+    func isStartLoading(isload: Bool)
+}

@@ -14,6 +14,7 @@ class Globals: NSObject{
     static let shared = Globals()
     var spinnerView = JTMaterialSpinner()
     var shareViewController: BaseViewController!
+    var validMenuVC: UIViewController!
     var transition: MaterialTransition?
     var fcmToken: String = ""
     var mobile: String = ""
@@ -21,6 +22,8 @@ class Globals: NSObject{
     var isloaderWithinButton: Bool = false
     var videoPath: URL!
     var message = ""
+    var disableLoaderForSomeScreen: Bool = false
+    var existingIndex: Int = 0
     
     
     func isValidEmail(emailStr:String) -> Bool {
