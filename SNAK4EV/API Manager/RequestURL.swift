@@ -28,5 +28,10 @@ public enum RequestMethod : String
     case getProfileApi = "GetCustomer/"
     
     case getChargerDetailsApi = "GetChargerQRCode/"
+    
+    case getChargeStationListApi = "https://api.edrv.io/v1.1/chargestations"
+    
+    case getChargeLocationApi = "https://api.edrv.io/v1.1/locations/"
+    
 
 }

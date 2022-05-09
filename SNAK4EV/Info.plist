@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Requires user’s location for better user experience to get more charge station near by you.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Requires user’s location for better user experience to get more charge station near by you.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>To make it easier to take your photo from camera</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -15,6 +9,8 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 </dict>

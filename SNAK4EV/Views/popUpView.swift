@@ -11,7 +11,6 @@ class popUpView: UIView {
     var view: UIView!
     
     @IBOutlet weak var lblAddress: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
 @IBOutlet weak var btnNAvigate: UIButton!
 @IBOutlet weak var btnSelection: UIButton!
     @IBOutlet weak var imgType: UIImageView!
@@ -25,34 +24,41 @@ class popUpView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewSetup()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         btnNAvigate.layer.cornerRadius = 5
         btnSelection.layer.cornerRadius = 5
-        imgType.layer.cornerRadius = imgType.frame.size.height/2
-        imgCharge.layer.cornerRadius = imgType.frame.size.height/2
-        imgAmount.layer.cornerRadius = imgType.frame.size.height/2
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        viewSetup()
     }
     
-    func viewSetup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        addSubview(view)
+    func setObject(locationModel: ChargeStationLocationModel, details: ChargeStationList){
+        self.lblAddress.text = self.getAddress(locationModel: locationModel)
+        if let type = details.connectors?[0].type as? String{
+            self.lblType.text = type
+        }
+        if let power = details.connectors?[0].power as? Int{
+            self.lblCharge.text = "\(power)" + "kW"
+        }
+        if let amount = details.connectors?[0].rate?.name as? String{
+            self.lblAmount.text = amount.replacingOccurrences(of: "rs", with: "")
+        }
+        if let status = details.connectors?[0].status as? String{
+            self.lblAvailable.text = status
+        }
     }
     
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: popUpView.self)
-        let contentView = bundle.loadNibNamed("popUpView", owner: self, options: nil)?[0] as! UIView
-        return contentView
+    func getAddress(locationModel: ChargeStationLocationModel)-> String{
+        let street = locationModel.result?.address?.streetAndNumber ?? ""
+        let city = locationModel.result?.address?.city ?? ""
+        let state = locationModel.result?.address?.state ?? "" + ", "
+        let postalcode = locationModel.result?.address?.postalCode ?? ""
+        return (street + ", " + city + ", " + state  + ", " + postalcode)
     }
 }
 

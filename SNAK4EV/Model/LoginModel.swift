@@ -22,11 +22,11 @@ struct UserDetails
 struct TokenDetails
 {
     public init() {}
-    public static var tokenModel: OTPAuthenticateModel?
+    public static var tokenModel: ApiTokenModel?
     {
         let data = UserDefaults.standard.data(forKey: "TokenDetails")
         guard data != nil else { return nil}
-        return try? JSONDecoder().decode(OTPAuthenticateModel.self, from: data!)
+        return try? JSONDecoder().decode(ApiTokenModel.self, from: data!)
     }
 }
 

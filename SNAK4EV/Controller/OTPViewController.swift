@@ -21,7 +21,7 @@ class OTPViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //self.txtOTP.becomeFirstResponder()
         self.lblDesc.text = "Enter the 6 digit code we sent to you at +91 " + mobile
         self.totalTime = tmpTotalTime
         self.btnResendTop.constant = 60
@@ -128,8 +128,11 @@ extension OTPViewController{
         let params = ["mobileno": self.mobile, "otpauthcode": self.txtOTP.text ?? ""] as [String : Any]
         LoginVM.sharedInstance.otpAuthenticateRequest(param: params)
         LoginVM.sharedInstance.otpSuccess = {(otpGenerateModel) in
-            let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            LoginVM.sharedInstance.tokenRequest()
+            LoginVM.sharedInstance.tokenSuccess = {(apiToken)in
+                let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         LoginVM.sharedInstance.loginValidation = {(msg) in
             self.toast(message: msg)

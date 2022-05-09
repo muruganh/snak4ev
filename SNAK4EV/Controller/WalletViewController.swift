@@ -32,7 +32,7 @@ class WalletViewController: BaseViewController,RazorpayPaymentCompletionProtocol
         btn1000.tag = 1000
         btn2000.tag = 2000
         razorpay = RazorpayCheckout.initWithKey(razorApiKey, andDelegate: self)
-        headerView?.lblTitle.text = "WALLET"
+        navigationBar.lblTitle.text = "WALLET"
         walletView.dropDarkShadow()
         self.loadWalletBalance()
     }

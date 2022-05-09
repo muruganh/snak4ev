@@ -14,9 +14,9 @@ import UIKit
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var imgBack: UIImageView!
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewSetup()
     }
     
     override func awakeFromNib() {
@@ -25,19 +25,6 @@ import UIKit
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        viewSetup()
-    }
-    
-    func viewSetup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        addSubview(view)
-    }
-    
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: HeaderView.self)
-        let contentView = bundle.loadNibNamed("HeaderView", owner: self, options: nil)?[0] as! UIView
-        return contentView
     }
 }
 

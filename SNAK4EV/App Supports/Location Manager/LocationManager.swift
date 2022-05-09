@@ -19,21 +19,43 @@ class LocationManager: NSObject {
         self.locationManager.delegate = self
         self.locationManager.allowsBackgroundLocationUpdates = true
         
-        if CLLocationManager.locationServicesEnabled() {
-            let status = CLLocationManager.authorizationStatus()
-            if status == .notDetermined {
-                locationManager.requestWhenInUseAuthorization()
-            } else if status == .restricted || status == .denied {
-                // TODO show some dialog to let user allow app to get location
-            } else if status == .authorizedWhenInUse {
-                locationManager.startUpdatingLocation()
-            }
+        if !hasLocationPermission() {
+            print("pls enable location")
         }
+        
+//        if CLLocationManager.locationServicesEnabled() {
+//            let status = CLLocationManager.authorizationStatus()
+//            if status == .notDetermined {
+//                locationManager.requestWhenInUseAuthorization()
+//            } else if status == .restricted || status == .denied {
+//                // TODO show some dialog to let user allow app to get location
+//            } else if status == .authorizedWhenInUse {
+//                locationManager.startUpdatingLocation()
+//            }
+//        }
         self.locationManager.requestWhenInUseAuthorization()
     }
     
     var locationManager: CLLocationManager!
     var lastLocation: CLLocationCoordinate2D?
+    
+    func hasLocationPermission() -> Bool {
+            var hasPermission = false
+            if CLLocationManager.locationServicesEnabled() {
+                switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    hasPermission = false
+                case .authorizedAlways, .authorizedWhenInUse:
+                    hasPermission = true
+                default:
+                    hasPermission = true
+                }
+            } else {
+                hasPermission = false
+            }
+            
+            return hasPermission
+        }
     
 }
 

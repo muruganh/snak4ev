@@ -17,13 +17,34 @@ class ConnectorSelectionViewController: BaseViewController {
             self.tblView.reloadData()
         }
     }
+    
+    var connectorsList: [ConnectorsList] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView?.lblTitle.text = "CONNECTOR SELECTION"
+        Globals.shared.existingIndex = 10
+        navigationBar.lblTitle.text = "CONNECTOR SELECTION"
         let nib = UINib(nibName: "ConnectorTableViewCell", bundle: nil)
         self.tblView.register(nib, forCellReuseIdentifier: "ConnectorTableViewCell")
-        self.getChargerList()
+        if self.connectorsList.count == 0{
+            self.getChargerList()
+        }else{
+            DispatchQueue.main.async {
+                self.tblView.reloadData()
+                self.tblView.isHidden = false
+                self.lblNorecords.isHidden = !self.tblView.isHidden
+            }
+        }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationBar.imgBack.image = UIImage.init(named: "back")
+        navigationBar.btnBack.addTarget(self, action: #selector(btnMenu(_:)), for: .touchUpInside)
+    }
+    
+    @IBAction override func btnMenu(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     
     func getChargerList(){
         let params = ["qrcode": qrCode, "companyid":""] as [String : Any]
@@ -33,7 +54,7 @@ class ConnectorSelectionViewController: BaseViewController {
                 self.chargerList = list
                 self.tblView.isHidden = false
             }else{
-                self.toast(message: msg)
+                self.lblNorecords.text = msg
                 self.tblView.isHidden = true
             }
             self.lblNorecords.isHidden = !self.tblView.isHidden
@@ -43,11 +64,16 @@ class ConnectorSelectionViewController: BaseViewController {
 
 extension ConnectorSelectionViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.chargerList?.count ?? 0
+        return self.connectorsList.count != 0 ? self.connectorsList.count : (self.chargerList?.count ?? 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectorTableViewCell") as! ConnectorTableViewCell
+        if self.connectorsList.count != 0{
+            cell.connectorDetails = self.connectorsList[indexPath.row]
+        }else{
+            cell.chargeStationDetails = self.chargerList?[indexPath.row]
+        }
         return cell
     }
     

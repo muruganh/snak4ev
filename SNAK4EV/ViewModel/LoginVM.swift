@@ -22,6 +22,7 @@ class LoginVM: NSObject {
     var changePwdSuccess: ((String) -> Void)?
     //var getProfileData: ((ProfileDetails) -> Void)?
     var otpSuccess: ((OTPAuthenticateModel) -> Void)?
+    var tokenSuccess: ((ApiTokenModel) -> Void)?
     
     // MARK: - Init
     override init() {
@@ -67,6 +68,18 @@ class LoginVM: NSObject {
                     return
                 }
                 self.otpSuccess?(otpAuthenticateModel!)
+            }
+        }
+    }
+    
+    func tokenRequest(){
+        APIRequestManager.sharedInstance.getAccessToken(param:[:] as Dictionary<String, AnyObject>) { (success, tokenModel) in
+            if success
+            {
+                guard tokenModel?.status == "success" else{
+                    return
+                }
+                self.tokenSuccess?(tokenModel!)
             }
         }
     }

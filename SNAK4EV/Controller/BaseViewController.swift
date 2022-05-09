@@ -12,18 +12,23 @@ import JTMaterialSpinner
 class BaseViewController: UIViewController, LoaderStartStopDelegate {
     
     var spinnerView = JTMaterialSpinner()
-    @IBOutlet var headerView: HeaderView?
+    @IBOutlet var headerView: UIView?
     @IBOutlet var headerViewHeight: NSLayoutConstraint?
     let API = APIRequestManager.sharedInstance
+    var navigationBar = HeaderView.loadNib()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if headerView?.btnBack != nil{
-            headerView?.btnBack?.addTarget(self, action: #selector(btnMenu(_:)), for: .touchUpInside)
-            if Display.typeIsLike == .iphoneX{
-                headerViewHeight?.constant = 90
-            }else{
-                headerViewHeight?.constant = 70
+        
+        if headerView != nil{
+            headerView?.addSubview(navigationBar)
+            if navigationBar.btnBack != nil{
+                navigationBar.btnBack?.addTarget(self, action: #selector(btnMenu(_:)), for: .touchUpInside)
+                if Display.typeIsLike == .iphoneX{
+                    headerViewHeight?.constant = 90
+                }else{
+                    headerViewHeight?.constant = 70
+                }
             }
         }
 
@@ -86,5 +91,26 @@ extension BaseViewController{
     open func didEndLoading() {
         spinnerView.endRefreshing()
         self.view.isUserInteractionEnabled = true
+    }
+}
+
+extension BaseViewController: SideMenuNavigationControllerDelegate {
+
+    func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool) {
+        DispatchQueue.main.async {
+            self.view.alpha = 0.8
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func sideMenuDidAppear(menu: SideMenuNavigationController, animated: Bool) {
+        
+    }
+
+    func sideMenuWillDisappear(menu: SideMenuNavigationController, animated: Bool) {
+        self.view.alpha = 1
+    }
+
+    func sideMenuDidDisappear(menu: SideMenuNavigationController, animated: Bool) {
     }
 }

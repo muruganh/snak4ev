@@ -9,14 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeaderView" customModule="SNAK4EV" customModuleProvider="target">
-            <connections>
-                <outlet property="btnBack" destination="nxx-Wl-Od0" id="NhO-Om-Q0i"/>
-                <outlet property="lblTitle" destination="Fmj-BO-f15" id="mp8-Hh-HJW"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="trK-Nq-HH7">
+        <view contentMode="scaleToFill" id="trK-Nq-HH7" customClass="HeaderView" customModule="SNAK4EV" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="430" height="88"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -66,6 +61,11 @@
                 <constraint firstItem="9G8-1W-mgP" firstAttribute="leading" secondItem="nCP-JS-vWQ" secondAttribute="leading" id="fdh-A5-hdY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnBack" destination="nxx-Wl-Od0" id="rg6-hC-NAf"/>
+                <outlet property="imgBack" destination="VBk-BG-wWC" id="YTU-Rq-fio"/>
+                <outlet property="lblTitle" destination="Fmj-BO-f15" id="XDV-g9-HjK"/>
+            </connections>
             <point key="canvasLocation" x="147.82608695652175" y="564.50892857142856"/>
         </view>
     </objects>

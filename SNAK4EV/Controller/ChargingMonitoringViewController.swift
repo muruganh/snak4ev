@@ -11,7 +11,7 @@ class ChargingMonitoringViewController: BaseViewController {
     @IBOutlet weak var lblData : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView?.lblTitle.text = "CHARGE MONITORING"
+        navigationBar.lblTitle.text = "CHARGE MONITORING"
         //lblData.isHidden = true
         // Do any additional setup after loading the view.
     }

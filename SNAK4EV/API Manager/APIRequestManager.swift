@@ -43,6 +43,20 @@ class APIRequestManager {
         }
     }
     
+    func getAccessToken(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : ApiTokenModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.getTokenApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, ApiTokenModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, ApiTokenModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
     func getWalletBalance(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : UpdateWalletModel?) -> ())
     {
         Globals.shared.dontShowmessage = false
@@ -125,6 +139,65 @@ class APIRequestManager {
         }
     }
     
+    func getChargeStations(completion : @escaping(_ success : Bool , _ jsonObject : HomeModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        get(request: clientURLRequestGetMethod(isChargeLocationRequest: true, path: RequestMethod.getChargeStationListApi.rawValue)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, HomeModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, HomeModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func getChargeStationAddress(locId: String, completion : @escaping(_ success : Bool , _ jsonObject : ChargeStationLocationModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        let url = RequestMethod.getChargeLocationApi.rawValue + locId
+        get(request: clientURLRequestGetMethod(isChargeLocationRequest: true, path: url)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, ChargeStationLocationModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, ChargeStationLocationModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func autoCompletePlaces(searchKey: String = "", completion : @escaping(_ success : Bool , _ jsonObject : AutoCompletePlacesModel?) -> ())
+    {
+        let url = autoCompleteApi + "\(searchKey)"
+        
+        get(request: clientURLRequestGetMethod(path: url)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, AutoCompletePlacesModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, AutoCompletePlacesModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func aotoCompletePlaceDetails(searchKey: String = "", completion : @escaping(_ success : Bool , _ jsonObject : AutoCompletePlacesModelDetails?) -> ())
+    {
+        let url = autoCompletePlaceDetails + "\(searchKey)"
+        
+        get(request: clientURLRequestGetMethod(path: url)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, AutoCompletePlacesModelDetails.convertData(data: object as! Data))
+                }else{
+                    completion(false, AutoCompletePlacesModelDetails.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
     private func post(request: NSMutableURLRequest, completion: @escaping (_ success: Bool, _ object: AnyObject?) -> ()) {
         dataTask(request: request, method: "POST", completion: completion)
     }
@@ -137,7 +210,7 @@ class APIRequestManager {
         dataTask(request: request, method: "DELETE", completion: completion)
     }
     
-    private func clientURLRequestPostMethod(path: String, params: Dictionary<String , AnyObject>? = nil) -> NSMutableURLRequest {
+    private func clientURLRequestPostMethod(isChargeLocationRequest: Bool = false, path: String, params: Dictionary<String , AnyObject>? = nil) -> NSMutableURLRequest {
         if params != nil {
             var paramString = ""
             var index : Int = 0
@@ -151,7 +224,11 @@ class APIRequestManager {
                     paramString += "\(escapedKey)=\(escapedValue)&"
                 }
             }
-            return self.setRequestDatas(strUrl: baseURL+path, params: params as Any)
+            if isChargeLocationRequest{
+                return self.setRequestDatas(strUrl: path, params: params as Any)
+            }else{
+                return self.setRequestDatas(strUrl: baseURL+path, params: params as Any)
+            }
         }
         
         return NSMutableURLRequest()
@@ -187,28 +264,34 @@ class APIRequestManager {
         }
         
         let request = NSMutableURLRequest(url: NSURL(string: strUrl)! as URL)
-//        if(TokenDetails.tokenModel?.responseObject?.token != nil){
-//            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
-//            if PrintLog{
-//                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
-//            }
-//        }
+        if((TokenDetails.tokenModel?.access_token) != nil){
+            request.setValue("Bearer \(TokenDetails.tokenModel?.access_token ?? "")", forHTTPHeaderField: "Authorization")
+            if PrintLog{
+                print("token:----->\(TokenDetails.tokenModel?.access_token ?? "")")
+            }
+        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONSerialization.data(withJSONObject: params as Any, options: [])
         return request
     }
     
-    private func clientURLRequestGetMethod(path: String) -> NSMutableURLRequest {
-        let urlWithParams: NSString = baseURL+path as NSString
+    private func clientURLRequestGetMethod(isChargeLocationRequest: Bool = false, path: String) -> NSMutableURLRequest {
+        var urlWithParams: NSString = baseURL+path as NSString
+        if isChargeLocationRequest{
+            urlWithParams = path as NSString
+        }
+        if urlWithParams.contains("https://maps.googleapis.com/maps/api/place"){
+            urlWithParams = path as NSString
+        }
         print("Url:----->\(urlWithParams)")
         let urlStr  = urlWithParams.addingPercentEscapes(using: String.Encoding.utf8.rawValue)!
         let request = NSMutableURLRequest(url: NSURL(string: urlStr)! as URL)
-//        if(TokenDetails.tokenModel?.responseObject?.token != nil){
-//            request.setValue(TokenDetails.tokenModel?.responseObject?.token, forHTTPHeaderField: "token")
-//            if PrintLog{
-//                print("token:----->\((TokenDetails.tokenModel?.responseObject?.token)!)")
-//            }
-//        }
+        if((TokenDetails.tokenModel?.access_token) != nil){
+            request.setValue("Bearer \(TokenDetails.tokenModel?.access_token ?? "")", forHTTPHeaderField: "Authorization")
+            if PrintLog{
+                print("token:----->\(TokenDetails.tokenModel?.access_token ?? "")")
+            }
+        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         //let request = NSMutableURLRequest(url: NSURL(string: urlStr)! as URL)
         return request

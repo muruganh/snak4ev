@@ -24,6 +24,18 @@ class ConnectorTableViewCell: UITableViewCell {
     @IBOutlet weak var lblAvailable: UILabel!
     @IBOutlet weak var footerView: UIView!
     
+    var chargeStationDetails: ChargerLocationModel?{
+        didSet{
+            self.setObject()
+        }
+    }
+    
+    var connectorDetails: ConnectorsList?{
+        didSet{
+            self.setConnectorObject()
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,6 +56,18 @@ class ConnectorTableViewCell: UITableViewCell {
 //        let contentView = bundle.loadNibNamed("connectorHeaderView", owner: self, options: nil)?[0] as! UIView
 //        return contentView
 //    }
+    
+    func setObject(){
+        self.lblType.text = self.chargeStationDetails?.connectortype ?? ""
+        self.lblAmount.text = self.chargeStationDetails?.ratecur ?? ""
+        self.lblCharge.text = self.chargeStationDetails?.chargeronline ?? ""
+    }
+    
+    func setConnectorObject(){
+        self.lblType.text = self.connectorDetails?.type ?? ""
+        self.lblAmount.text = (self.connectorDetails?.rate?.name ?? "").lowercased().replacingOccurrences(of: "rs", with: "")
+        self.lblCharge.text = "\(self.connectorDetails?.power ?? 0)kW"
+    }
 }
 
 

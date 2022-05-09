@@ -12,7 +12,7 @@ let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
 
 let isProduction = true
 
-let PrintLog: Bool = true
+let PrintLog: Bool = false
 
 let liveEnv = "https://www.speedp.live/snak4ev/"
 
@@ -59,3 +59,9 @@ let PopupInfo = "info"
 let Success = "Success"
 
 let successCode = 200 ... 299
+
+let GoogleAddressApiKey = "AIzaSyDR23mfvFENPRkrpyguiXgB4qhjemohqYg"
+
+let autoCompleteApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?&components=country:in&key=\(GoogleAddressApiKey)&input="
+
+let autoCompletePlaceDetails = "https://maps.googleapis.com/maps/api/place/details/json?&key=\(GoogleAddressApiKey)&place_id="
