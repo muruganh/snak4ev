@@ -39,22 +39,14 @@ class RegisterViewController: BaseViewController {
     @IBAction func btnRegister(_ sender: UIButton) {
         ProfileVM.sharedInstance.profileUpdateValidation(firstName: self.txtFirstName.text ?? "", lastName: self.txtLastName.text ?? "", email: self.txtEmail.text ?? "", address: self.txtAddress.text ?? "", country: self.txtCountry.text ?? "", state: self.txtState.text ?? "", city: self.txtCity.text ?? "", postalCode: self.txtPostalCode.text ?? "", mobile: mobile)
         ProfileVM.sharedInstance.updateValidation = {(msg, success) in
-            if success{
-                print(msg)
-            }else{
+            if !success{
                 self.toast(message: msg)
             }
         }
+        ProfileVM.sharedInstance.profileDetails = {(profileDetails) in
+            let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

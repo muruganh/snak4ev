@@ -100,9 +100,22 @@ struct RegisterModel : Decodable
 {
     let status: String?
     let message: String?
+    let customerid: String?
     
     static func convertData(data: Data) -> RegisterModel? {
         let model = try! JSONDecoder().decode(RegisterModel.self, from: data)
+        return model
+    }
+}
+
+struct EdrvRegisterModel : Decodable
+{
+    let ok: Bool?
+    let message : String?
+    let id : String?
+    
+    static func convertData(data: Data) -> EdrvRegisterModel? {
+        let model = try! JSONDecoder().decode(EdrvRegisterModel.self, from: data)
         return model
     }
 }

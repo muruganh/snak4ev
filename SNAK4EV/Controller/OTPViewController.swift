@@ -128,13 +128,14 @@ extension OTPViewController{
         let params = ["mobileno": self.mobile, "otpauthcode": self.txtOTP.text ?? ""] as [String : Any]
         LoginVM.sharedInstance.otpAuthenticateRequest(param: params)
         LoginVM.sharedInstance.otpSuccess = {(otpModel) in
-            if otpModel.iscustomer == "0"{
-                let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
-                vc.mobile = self.mobile
-                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
-                LoginVM.sharedInstance.tokenRequest()
-                LoginVM.sharedInstance.tokenSuccess = {(apiToken)in
+            LoginVM.sharedInstance.tokenRequest()
+            LoginVM.sharedInstance.tokenSuccess = {(apiToken)in
+                if otpModel.iscustomer == "0"{
+                    let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
+                    vc.mobile = self.mobile
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    ProfileVM.sharedInstance.vc = self
                     ProfileVM.sharedInstance.getProfile()
                     ProfileVM.sharedInstance.profileDetails = {(profileDetails) in
                         let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController

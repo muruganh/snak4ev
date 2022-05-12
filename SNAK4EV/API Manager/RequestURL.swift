@@ -35,5 +35,8 @@ public enum RequestMethod : String
     
     case getChargeLocationApi = "https://api.edrv.io/v1.1/locations/"
     
+    case registerUserEdrv = "https://api.edrv.io/v1.1/users"
+    
+    case custConnectInterface = "CustConnectInteface/"
 
 }

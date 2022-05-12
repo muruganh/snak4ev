@@ -43,6 +43,20 @@ class APIRequestManager {
         }
     }
     
+    func getCustConnectInterface(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : RegisterModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.custConnectInterface.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, RegisterModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, RegisterModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
     
     func register(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : RegisterModel?) -> ())
     {
@@ -53,6 +67,20 @@ class APIRequestManager {
                     completion(true, RegisterModel.convertData(data: object as! Data))
                 }else{
                     completion(false, RegisterModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    func registerUserEdrv(param :Dictionary<String , AnyObject> ,completion : @escaping(_ success : Bool , _ jsonObject : EdrvRegisterModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(isChargeLocationRequest: true, path: RequestMethod.registerUserEdrv.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, EdrvRegisterModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, EdrvRegisterModel.convertData(data: object as! Data))
                 }
             })
         }

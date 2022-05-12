@@ -26,6 +26,7 @@ class ProfileDataViewController: BaseViewController, ProfileUpdateDelegate {
         tableView.isHidden = false
         tableView.sectionHeaderHeight = 80.00
         self.viewContent.dropDarkShadow()
+        ProfileVM.sharedInstance.vc = self
         ProfileVM.sharedInstance.getProfile()
         ProfileVM.sharedInstance.profileDetails = {(profileDetails) in
             self.setUserDetails(profileDetails: profileDetails)
