@@ -19,6 +19,8 @@ public enum RequestMethod : String
     
     case getTokenApi = "GetToken/"
     
+    case registerApi = "CustomerCreation/"
+    
     case getWalletBalanceApi = "GetWalletBalance/"
     
     case updateWalletApi = "LoadWallet/"

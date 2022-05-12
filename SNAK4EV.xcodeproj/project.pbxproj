@@ -72,6 +72,7 @@
 		1821E42428226C99005940C9 /* ChargerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821E42328226C99005940C9 /* ChargerModel.swift */; };
 		1821E42828227880005940C9 /* ConnectorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821E42628227880005940C9 /* ConnectorTableViewCell.xib */; };
 		1821E42A2826F414005940C9 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821E4292826F414005940C9 /* HomeModel.swift */; };
+		1841C89A282D125900936365 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841C899282D125900936365 /* RegisterViewController.swift */; };
 		18B43330281C1F7900A9B5FC /* WalletVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B4332F281C1F7900A9B5FC /* WalletVM.swift */; };
 		18B43332281C20A000A9B5FC /* WalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B43331281C20A000A9B5FC /* WalletModel.swift */; };
 		1A19C319FD6596DE493EC4DF /* Pods_SNAK4EVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BEC77E4A6E0ECCFAA832F6 /* Pods_SNAK4EVTests.framework */; };
@@ -178,6 +179,7 @@
 		1821E42328226C99005940C9 /* ChargerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerModel.swift; sourceTree = "<group>"; };
 		1821E42628227880005940C9 /* ConnectorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectorTableViewCell.xib; sourceTree = "<group>"; };
 		1821E4292826F414005940C9 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		1841C899282D125900936365 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18B4332F281C1F7900A9B5FC /* WalletVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVM.swift; sourceTree = "<group>"; };
 		18B43331281C20A000A9B5FC /* WalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletModel.swift; sourceTree = "<group>"; };
 		18F3818327F5D8C50060AE5E /* SNAK4EV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SNAK4EV.entitlements; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				18054A9327F39EC4005EDC72 /* BaseViewController.swift */,
 				4C8DAD4527F4C35900639668 /* LoginViewController.swift */,
 				18109C622818727A0073DCBC /* OTPViewController.swift */,
+				1841C899282D125900936365 /* RegisterViewController.swift */,
 				4C09BBAA2805659D00CD57FD /* HomeViewController.swift */,
 				18054A3327F39872005EDC72 /* WalletViewController.swift */,
 				18054A3527F39872005EDC72 /* AboutViewController.swift */,
@@ -782,6 +785,7 @@
 				18054A6F27F39E9C005EDC72 /* StackViewExtension.swift in Sources */,
 				18054A8627F39E9C005EDC72 /* Globals.swift in Sources */,
 				18054A8027F39E9C005EDC72 /* CosmosTouchTarget.swift in Sources */,
+				1841C89A282D125900936365 /* RegisterViewController.swift in Sources */,
 				18054A3727F39872005EDC72 /* ProfileDataViewController.swift in Sources */,
 				18054A7427F39E9C005EDC72 /* StarFillMode.swift in Sources */,
 				4C09BBA9280562E200CD57FD /* ChargingMonitoringViewController.swift in Sources */,
@@ -1014,14 +1018,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SNAK4EV/SNAK4EV.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3HG5V2RH44;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SNAK4EV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SNAK4EV;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To make it easier to take your photo from camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To make it easier to scan qr code and get charge locations";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Requires user’s location for better user experience to get charger locations";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Requires user’s location for better user experience to get charger locations";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1052,14 +1056,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SNAK4EV/SNAK4EV.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3HG5V2RH44;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SNAK4EV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SNAK4EV;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To make it easier to take your photo from camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To make it easier to scan qr code and get charge locations";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Requires user’s location for better user experience to get charger locations";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Requires user’s location for better user experience to get charger locations";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

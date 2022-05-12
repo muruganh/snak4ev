@@ -12,7 +12,7 @@ let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
 
 let isProduction = true
 
-let PrintLog: Bool = false
+let PrintLog: Bool = true
 
 let liveEnv = "https://www.speedp.live/snak4ev/"
 

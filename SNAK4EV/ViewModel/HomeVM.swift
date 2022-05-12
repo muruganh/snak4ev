@@ -27,8 +27,10 @@ class HomeVM: NSObject {
         }
     }
     
-    func getChargeStationAddress(locId: String){
+    func getChargeStationAddress(locId: String, vc: BaseViewController){
+        vc.didBeginLoading()
         APIRequestManager.sharedInstance.getChargeStationAddress(locId: locId) { success, locationModel in
+            vc.didEndLoading()
             guard locationModel?.ok ?? false else{
                 return
             }
@@ -36,9 +38,11 @@ class HomeVM: NSObject {
         }
     }
     
-    func getPlaces(searchString: String){
+    func getPlaces(searchString: String, vc: BaseViewController){
+        vc.didBeginLoading()
         APIRequestManager().autoCompletePlaces(searchKey: searchString) { (success, placeModel) in
             if(success){
+                vc.didEndLoading()
                 guard placeModel?.predictions?.count != 0 else{
                     self.autoCompleteResponse?(false, [])
                     return

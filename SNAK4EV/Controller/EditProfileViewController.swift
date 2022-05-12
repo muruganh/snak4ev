@@ -19,6 +19,7 @@ class EditProfileViewController: BaseViewController {
     @IBOutlet weak var txtCountry: UITextField!
     @IBOutlet weak var txtPostalCode: UITextField!
     @IBOutlet weak var lblMobile: UILabel!
+    var delegate: ProfileUpdateDelegate?
     
     @IBOutlet weak var btnBack: UIButton!
     var profileModel: ProfileModel?
@@ -164,7 +165,11 @@ class EditProfileViewController: BaseViewController {
     @IBAction func updateBtn(_ sender: UIButton) {
         ProfileVM.sharedInstance.profileUpdateValidation(firstName: self.txtFirstName.text ?? "", lastName: self.txtLastName.text ?? "", email: self.txtEmail.text ?? "", address: self.txtAddress.text ?? "", country: self.txtCountry.text ?? "", state: self.txtState.text ?? "", city: self.txtCity.text ?? "", postalCode: self.txtPostalCode.text ?? "", mobile: self.profileModel?.mobilenumber ?? "")
         ProfileVM.sharedInstance.updateValidation = {(msg, success) in
-            self.toast(message: msg)
+            ProfileVM.sharedInstance.getProfile()
+            ProfileVM.sharedInstance.profileDetails = {(profileDetails) in
+                self.profileModel = profileDetails
+                self.toast(message: msg)
+            }
         }
     }
     
@@ -185,6 +190,7 @@ class EditProfileViewController: BaseViewController {
     
     
     @IBAction func backBtn(_ sender: Any) {
+        self.delegate?.setUserDetails(profileDetails: self.profileModel!)
         self.navigationController?.popViewController(animated: true)
     }
 }

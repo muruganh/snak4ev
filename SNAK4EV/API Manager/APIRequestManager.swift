@@ -43,6 +43,22 @@ class APIRequestManager {
         }
     }
     
+    
+    func register(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : RegisterModel?) -> ())
+    {
+        Globals.shared.dontShowmessage = false
+        post(request: clientURLRequestPostMethod(path: RequestMethod.registerApi.rawValue, params: param)) { (success, object) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if success {
+                    completion(true, RegisterModel.convertData(data: object as! Data))
+                }else{
+                    completion(false, RegisterModel.convertData(data: object as! Data))
+                }
+            })
+        }
+    }
+    
+    
     func getAccessToken(param :Dictionary<String , AnyObject> , completion : @escaping(_ success : Bool , _ jsonObject : ApiTokenModel?) -> ())
     {
         Globals.shared.dontShowmessage = false

@@ -147,7 +147,7 @@ class HomeViewController: BaseViewController,CLLocationManagerDelegate, UITextFi
     
     @objc func search(){
         Globals.shared.disableLoaderForSomeScreen = true
-        HomeVM.sharedInstance.getPlaces(searchString: searchString)
+        HomeVM.sharedInstance.getPlaces(searchString: searchString, vc: self)
         HomeVM.sharedInstance.autoCompleteResponse = {(success, list) in
             if(success){
                 self.autoCompleteList = list
@@ -191,7 +191,8 @@ extension HomeViewController: GMSMapViewDelegate, UITableViewDelegate, UITableVi
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print(marker.userData!)
         self.chargeLocationDetails = marker.userData as? ChargeStationList
-        HomeVM.sharedInstance.getChargeStationAddress(locId: self.chargeLocationDetails?.location ?? "")
+        HomeVM.sharedInstance.getChargeStationAddress(locId: self.chargeLocationDetails?.location ?? "", vc: self)
+        self.txtSearch?.resignFirstResponder()
         return true
     }
     

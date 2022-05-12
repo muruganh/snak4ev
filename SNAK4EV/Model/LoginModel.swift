@@ -8,14 +8,25 @@
 import Foundation
 import Alamofire
 
+struct OTPUserDetails
+{
+    public init() {}
+    public static var OTPDetailModel: OTPAuthenticateModel?
+    {
+        let data = UserDefaults.standard.data(forKey: "OTP")
+        guard data != nil else { return nil}
+        return try? JSONDecoder().decode(OTPAuthenticateModel.self, from: data!)
+    }
+}
+
 struct UserDetails
 {
     public init() {}
-    public static var UserDetailModel: OTPAuthenticateModel?
+    public static var UserDetailModel: ProfileModel?
     {
         let data = UserDefaults.standard.data(forKey: "UserDetails")
         guard data != nil else { return nil}
-        return try? JSONDecoder().decode(OTPAuthenticateModel.self, from: data!)
+        return try? JSONDecoder().decode(ProfileModel.self, from: data!)
     }
 }
 
@@ -54,7 +65,7 @@ struct OTPAuthenticateModel : Decodable
     let interfaceid: String?
     
     static func convertData(data: Data) -> OTPAuthenticateModel? {
-        UserDefaults.standard.set(data, forKey: "UserDetails")
+        UserDefaults.standard.set(data, forKey: "OTP")
         let model = try! JSONDecoder().decode(OTPAuthenticateModel.self, from: data)
         return model
     }
@@ -82,5 +93,16 @@ struct Connectivity{
     static let sharedInstance = NetworkReachabilityManager()!
     static var isConnectedToInternet:Bool{
         return self.sharedInstance.isReachable
+    }
+}
+
+struct RegisterModel : Decodable
+{
+    let status: String?
+    let message: String?
+    
+    static func convertData(data: Data) -> RegisterModel? {
+        let model = try! JSONDecoder().decode(RegisterModel.self, from: data)
+        return model
     }
 }

@@ -13,7 +13,7 @@ class ProfileVM: NSObject{
     var updateValidation: ((String, Bool) -> Void)?
     
     func getProfile(){
-        let params = ["customerid": UserDetails.UserDetailModel?.customerid ?? ""] as [String : Any]
+        let params = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? ""] as [String : Any]
         APIRequestManager.sharedInstance.getProfile(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
             if success
             {
@@ -25,7 +25,7 @@ class ProfileVM: NSObject{
         }
     }
     
-    func profileUpdateValidation(firstName: String, lastName: String, email: String, address: String, country: String, state: String, city: String, postalCode: String, mobile: String){
+    func profileUpdateValidation(firstName: String, lastName: String, email: String, address: String, country: String, state: String, city: String, postalCode: String, mobile: String, isRegister: Bool = false){
         guard firstName != "" else{
             self.updateValidation?(FirstNameError, false)
             return
@@ -62,7 +62,7 @@ class ProfileVM: NSObject{
             self.updateValidation?(PostalCodeError, false)
             return
         }
-        let params = ["customerid": UserDetails.UserDetailModel?.customerid ?? "",
+        var params = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? "",
                       "firstname": firstName,
                       "lastname": lastName,
                       "email": email,
@@ -72,11 +72,30 @@ class ProfileVM: NSObject{
                       "address": address,
                       "postalcode": postalCode,
                       "mobileno": mobile] as [String : Any]
-        self.updateProfile(params: params)
+        
+        if isRegister{
+            params.removeValue(forKey: "customerid")
+            self.userRegister(params: params)
+        }else{
+            self.updateProfile(params: params)
+        }
     }
     
     func updateProfile(params: [String: Any]){
         APIRequestManager.sharedInstance.profileUpdate(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
+            if success
+            {
+                guard profileModel?.status == "success" else{
+                    self.updateValidation?(profileModel?.message ?? "", false)
+                    return
+                }
+                self.updateValidation?(profileModel?.message ?? "", true)
+            }
+        }
+    }
+    
+    func userRegister(params: [String: Any]){
+        APIRequestManager.sharedInstance.register(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
             if success
             {
                 guard profileModel?.status == "success" else{

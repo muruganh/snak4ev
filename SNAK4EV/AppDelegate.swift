@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate{
     func setRootVC(){
-        let isValidUser = UserDetails.UserDetailModel?.customerid != nil ? true : false
+        let isValidUser = OTPUserDetails.OTPDetailModel?.customerid != nil ? true : false
         let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController:UINavigationController = storyboard.instantiateInitialViewController() as! UINavigationController
         if(Connectivity.isConnectedToInternet){

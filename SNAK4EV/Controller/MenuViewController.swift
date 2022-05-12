@@ -28,7 +28,10 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionHeaderCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionHeaderCell", for: indexPath) as! SectionHeaderCell
+            if let name = UserDetails.UserDetailModel?.first_name as? String{
+                cell.lblTitle.text = name.capitalized
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
@@ -89,5 +92,10 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
 class MenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgMenu: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+}
+
+class SectionHeaderCell: UITableViewCell {
+    @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
 }

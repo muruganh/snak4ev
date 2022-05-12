@@ -15,3 +15,8 @@ protocol ImageUpdateDelegate {
 protocol LoaderStartStopDelegate: AnyObject {
     func isStartLoading(isload: Bool)
 }
+
+
+protocol ProfileUpdateDelegate: AnyObject {
+    func setUserDetails(profileDetails: ProfileModel)
+}

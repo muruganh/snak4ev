@@ -22,6 +22,7 @@ struct ProfileModel : Decodable
     let postal_code: String?
     
     static func convertData(data: Data) -> ProfileModel? {
+        UserDefaults.standard.set(data, forKey: "UserDetails")
         let model = try! JSONDecoder().decode(ProfileModel.self, from: data)
         return model
     }
