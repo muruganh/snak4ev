@@ -8,17 +8,6 @@
 import Foundation
 import Alamofire
 
-struct OTPUserDetails
-{
-    public init() {}
-    public static var OTPDetailModel: OTPAuthenticateModel?
-    {
-        let data = UserDefaults.standard.data(forKey: "OTP")
-        guard data != nil else { return nil}
-        return try? JSONDecoder().decode(OTPAuthenticateModel.self, from: data!)
-    }
-}
-
 struct UserDetails
 {
     public init() {}
@@ -65,7 +54,6 @@ struct OTPAuthenticateModel : Decodable
     let interfaceid: String?
     
     static func convertData(data: Data) -> OTPAuthenticateModel? {
-        UserDefaults.standard.set(data, forKey: "OTP")
         let model = try! JSONDecoder().decode(OTPAuthenticateModel.self, from: data)
         return model
     }

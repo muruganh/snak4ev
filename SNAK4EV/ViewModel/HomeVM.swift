@@ -39,10 +39,10 @@ class HomeVM: NSObject {
     }
     
     func getPlaces(searchString: String, vc: BaseViewController){
-        vc.didBeginLoading()
+        //vc.didBeginLoading()
         APIRequestManager().autoCompletePlaces(searchKey: searchString) { (success, placeModel) in
             if(success){
-                vc.didEndLoading()
+                //vc.didEndLoading()
                 guard placeModel?.predictions?.count != 0 else{
                     self.autoCompleteResponse?(false, [])
                     return

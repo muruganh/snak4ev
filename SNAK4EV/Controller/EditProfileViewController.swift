@@ -19,6 +19,11 @@ class EditProfileViewController: BaseViewController {
     @IBOutlet weak var txtCountry: UITextField!
     @IBOutlet weak var txtPostalCode: UITextField!
     @IBOutlet weak var lblMobile: UILabel!
+    @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var btnTerms: UIButton!
+    @IBOutlet weak var btnCheckbox: UIButton!
+    @IBOutlet weak var viewTerms: UIView!
+    @IBOutlet weak var btnUpdateTopConstraint: NSLayoutConstraint!
     var delegate: ProfileUpdateDelegate?
     
     @IBOutlet weak var btnBack: UIButton!
@@ -34,11 +39,15 @@ class EditProfileViewController: BaseViewController {
     
     var cityId: Int?
     
+    var isRegister = false
+    
+    var mobile = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        btnBack.layer.borderWidth = 1.0
-        btnBack.layer.borderColor = UIColor.lightGray.cgColor
+//        btnBack.layer.borderWidth = 1.0
+//        btnBack.layer.borderColor = UIColor.lightGray.cgColor
         
         removeBoder(textField: txtFirstName)
         removeBoder(textField: txtLastName)
@@ -51,7 +60,39 @@ class EditProfileViewController: BaseViewController {
         
         self.getCountryJson()
         self.setPadding()
-        self.setUserDetails()
+        
+        
+        if isRegister{
+            self.lblMobile.text = self.mobile
+            btnUpdate.setTitle("Register", for: .normal)
+        }else{
+            self.btnUpdateTopConstraint.constant = 24
+            self.viewTerms.isHidden = true
+            self.setUserDetails()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationBar.lblTitle.text = isRegister ? "Create Account" : "Edit Profile"
+        navigationBar.imgBack.image = UIImage.init(named: "back")
+        navigationBar.btnBack.addTarget(self, action: #selector(btnMenu(_:)), for: .touchUpInside)
+    }
+    
+    @IBAction override func btnMenu(_ sender: UIButton){
+        if isRegister{
+            self.logOut()
+        }else{
+            self.delegate?.setUserDetails(profileDetails: self.profileModel!)
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @IBAction func btnCheckbox(_ sender: UIButton){
+        if sender.isSelected{
+            sender.isSelected = false
+        }else{
+            sender.isSelected = true
+        }
     }
     
     func setUserDetails(){
@@ -163,7 +204,31 @@ class EditProfileViewController: BaseViewController {
     }
     
     @IBAction func updateBtn(_ sender: UIButton) {
-        ProfileVM.sharedInstance.profileUpdateValidation(firstName: self.txtFirstName.text ?? "", lastName: self.txtLastName.text ?? "", email: self.txtEmail.text ?? "", address: self.txtAddress.text ?? "", country: self.txtCountry.text ?? "", state: self.txtState.text ?? "", city: self.txtCity.text ?? "", postalCode: self.txtPostalCode.text ?? "", mobile: self.profileModel?.mobilenumber ?? "")
+        if isRegister{
+            self.registerRequest()
+        }else{
+            self.updateRequest()
+        }
+    }
+    
+    func registerRequest(){
+        let terms = self.btnCheckbox.isSelected
+        ProfileVM.sharedInstance.profileUpdateValidation(firstName: self.txtFirstName.text ?? "", lastName: self.txtLastName.text ?? "", email: self.txtEmail.text ?? "", address: self.txtAddress.text ?? "", country: self.txtCountry.text ?? "", state: self.txtState.text ?? "", city: self.txtCity.text ?? "", postalCode: self.txtPostalCode.text ?? "", mobile: mobile, isRegister: true, isTerms: terms, vc: self)
+        ProfileVM.sharedInstance.updateValidation = {(msg, success) in
+            if !success{
+                self.didEndLoading()
+                self.toast(message: msg)
+            }
+        }
+        ProfileVM.sharedInstance.profileDetails = {(profileDetails) in
+            self.didEndLoading()
+            let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func updateRequest(){
+        ProfileVM.sharedInstance.profileUpdateValidation(firstName: self.txtFirstName.text ?? "", lastName: self.txtLastName.text ?? "", email: self.txtEmail.text ?? "", address: self.txtAddress.text ?? "", country: self.txtCountry.text ?? "", state: self.txtState.text ?? "", city: self.txtCity.text ?? "", postalCode: self.txtPostalCode.text ?? "", mobile: self.profileModel?.mobilenumber ?? "", vc: self)
         ProfileVM.sharedInstance.vc = self
         ProfileVM.sharedInstance.updateValidation = {(msg, success) in
             ProfileVM.sharedInstance.getProfile()
@@ -189,9 +254,8 @@ class EditProfileViewController: BaseViewController {
         }
     }
     
-    
-    @IBAction func backBtn(_ sender: Any) {
-        self.delegate?.setUserDetails(profileDetails: self.profileModel!)
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func btnTerms(_ sender: UIButton) {
+        let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "TermsConditionViewController") as! TermsConditionViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

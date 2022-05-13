@@ -11,16 +11,16 @@ class ProfileVM: NSObject{
     static let sharedInstance = ProfileVM()
     var profileDetails: ((ProfileModel) -> Void)?
     var updateValidation: ((String, Bool) -> Void)?
-    var vc: BaseViewController?
+    var vc = BaseViewController()
     
     func getProfile(){
-        let params = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? ""] as [String : Any]
+        let params = ["customerid": Globals.shared.customerId] as [String : Any]
         self.getProfileRequest(params: params)
     }
     
     func getProfileRequest(params: [String: Any]){
         APIRequestManager.sharedInstance.getProfile(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
-            self.vc?.didEndLoading()
+            self.vc.didEndLoading()
             if success
             {
                 guard profileModel?.status == "success" else{
@@ -31,7 +31,8 @@ class ProfileVM: NSObject{
         }
     }
     
-    func profileUpdateValidation(firstName: String, lastName: String, email: String, address: String, country: String, state: String, city: String, postalCode: String, mobile: String, isRegister: Bool = false){
+    func profileUpdateValidation(firstName: String, lastName: String, email: String, address: String, country: String, state: String, city: String, postalCode: String, mobile: String, isRegister: Bool = false, isTerms: Bool = false, vc: BaseViewController){
+        self.vc = vc
         guard firstName != "" else{
             self.updateValidation?(FirstNameError, false)
             return
@@ -68,7 +69,13 @@ class ProfileVM: NSObject{
             self.updateValidation?(PostalCodeError, false)
             return
         }
-        var params = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? "",
+        if isRegister{
+            guard isTerms else{
+                self.updateValidation?(TermsConditions, false)
+                return
+            }
+        }
+        var params = ["customerid": Globals.shared.customerId,
                       "firstname": firstName,
                       "lastname": lastName,
                       "email": email,
@@ -81,7 +88,7 @@ class ProfileVM: NSObject{
         
         if isRegister{
             params.removeValue(forKey: "customerid")
-            self.vc?.didBeginLoading()
+            self.vc.didBeginLoading()
             self.userRegister(params: params)
         }else{
             self.updateProfile(params: params)
@@ -89,9 +96,9 @@ class ProfileVM: NSObject{
     }
     
     func updateProfile(params: [String: Any]){
-        self.vc?.didBeginLoading()
+        self.vc.didBeginLoading()
         APIRequestManager.sharedInstance.profileUpdate(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
-            self.vc?.didEndLoading()
+            self.vc.didEndLoading()
             if success
             {
                 guard profileModel?.status == "success" else{
@@ -108,7 +115,7 @@ class ProfileVM: NSObject{
             if success
             {
                 guard registerModel?.status == "success" else{
-                    self.vc?.didEndLoading()
+                    self.vc.didEndLoading()
                     self.updateValidation?(registerModel?.message ?? "", false)
                     return
                 }
@@ -116,24 +123,23 @@ class ProfileVM: NSObject{
                 let address = ["country": params["country"] ?? "",
                                "state": params["state"] ?? "",
                                "city": params["city"] ?? "",
-                               "address": params["address"] ?? "",
-                               "postalCode": params["postalCode"] ?? "",
-                               "streetAndNumber":""] as [String : Any]
+                               "postalCode": params["postalcode"] ?? "",
+                               "streetAndNumber":params["address"] ?? "",] as [String : Any]
                 
                 let phone = ["mobile": params["mobileno"] ?? ""] as [String : Any]
                 
-                let meta_data = ["customerid": registerModel?.customerid ?? "",
-                                 "picture":"",
-                                 "firstname": params["firstname"] ?? "",
-                                 "lastname": params["firstname"] ?? "",
-                                 "email": params["firstname"] ?? ""] as [String : Any]
+                let meta_data = ["customerid": registerModel?.customerid ?? ""] as [String : Any]
                 
-                let edrvParams = ["customerid": registerModel?.customerid ?? "",
-                                  "active":true,
+                let edrvParams = ["active":true,
                                   "address":address,
                                   "phone":phone,
-                                  "meta_data":meta_data] as [String : Any]
+                                  "meta_data":meta_data,
+                                  "picture":"",
+                                  "firstname": params["firstname"] ?? "",
+                                  "lastname": params["lastname"] ?? "",
+                                  "email": params["email"] ?? ""] as [String : Any]
                 
+                self.vc.didBeginLoading()
                 self.userRegisterEdrv(params: edrvParams, customerid: registerModel?.customerid ?? "")
             }
         }
@@ -144,7 +150,7 @@ class ProfileVM: NSObject{
             if success
             {
                 guard edrvModel?.ok ?? false else{
-                    self.vc?.didEndLoading()
+                    self.vc.didEndLoading()
                     self.updateValidation?(edrvModel?.message ?? "", false)
                     return
                 }
@@ -156,15 +162,18 @@ class ProfileVM: NSObject{
     }
     
     func PostCustConnectIntefaceTOSNAKEV(params: [String: Any], customerid: String){
+        self.vc.didBeginLoading()
         APIRequestManager.sharedInstance.getCustConnectInterface(param:params as Dictionary<String, AnyObject>) { (success, profileModel) in
             if success
             {
                 guard profileModel?.status == "success" else{
-                    self.vc?.didEndLoading()
+                    self.vc.didEndLoading()
                     self.updateValidation?(profileModel?.message ?? "", false)
                     return
                 }
-                let params = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? ""] as [String : Any]
+                UserDefaults.standard.set(customerid, forKey: "customerid")
+                Globals.shared.customerId = customerid
+                let params = ["customerid": customerid] as [String : Any]
                 self.getProfileRequest(params: params)
             }
         }

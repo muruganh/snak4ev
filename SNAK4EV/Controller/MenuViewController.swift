@@ -70,10 +70,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
                 self.navigationController?.pushViewController(vc, animated: true)
             }else if indexPath.row == 7{
-                UserDefaults.standard.removeObject(forKey: "UserDetails")
-                UserDefaults.standard.removeObject(forKey: "TokenDetails")
-                let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.logOut()
             }
             
         }

@@ -34,11 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate{
     func setRootVC(){
-        let isValidUser = OTPUserDetails.OTPDetailModel?.customerid != nil ? true : false
+        let isValidUser = UserDefaults.standard.object(forKey: "customerid") != nil ? true : false
         let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController:UINavigationController = storyboard.instantiateInitialViewController() as! UINavigationController
         if(Connectivity.isConnectedToInternet){
             if isValidUser{
+                Globals.shared.customerId = UserDefaults.standard.object(forKey: "customerid") as? String ?? ""
                 let rootViewController:UIViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                 navigationController.viewControllers = [rootViewController]
             }else{

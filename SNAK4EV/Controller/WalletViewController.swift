@@ -38,7 +38,7 @@ class WalletViewController: BaseViewController,RazorpayPaymentCompletionProtocol
     }
     
     func loadWalletBalance(){
-        let walletParams = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? ""] as [String : Any]
+        let walletParams = ["customerid": Globals.shared.customerId] as [String : Any]
         WalletVM.sharedInstance.getWalletRequest(param: walletParams)
         WalletVM.sharedInstance.loadWalletAmount = {(success, amount) in
             if success{
@@ -92,7 +92,7 @@ class WalletViewController: BaseViewController,RazorpayPaymentCompletionProtocol
     }
 
     func onPaymentSuccess(_ payment_id: String) {
-        let walletParams = ["customerid": OTPUserDetails.OTPDetailModel?.customerid ?? "", "walletamt": self.selectedAmount] as [String : Any]
+        let walletParams = ["customerid": Globals.shared.customerId, "walletamt": self.selectedAmount] as [String : Any]
         WalletVM.sharedInstance.updateWalletRequest(param: walletParams)
         WalletVM.sharedInstance.updateWalletStatus = {(success, msg) in
             if success{

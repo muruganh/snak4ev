@@ -53,6 +53,18 @@ class BaseViewController: UIViewController, LoaderStartStopDelegate {
         present(menu, animated: true, completion: nil)
     }
     
+    func logOut(){
+        Globals.shared.customerId = ""
+        UserDefaults.standard.removeObject(forKey: "UserDetails")
+        UserDefaults.standard.removeObject(forKey: "TokenDetails")
+        UserDefaults.standard.removeObject(forKey: "customerid")
+        UserDefaults.standard.synchronize()
+        DispatchQueue.main.async {
+            let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

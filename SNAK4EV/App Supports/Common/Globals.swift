@@ -24,6 +24,7 @@ class Globals: NSObject{
     var message = ""
     var disableLoaderForSomeScreen: Bool = false
     var existingIndex: Int = 0
+    var customerId = ""
     
     
     func isValidEmail(emailStr:String) -> Bool {

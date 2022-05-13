@@ -124,6 +124,10 @@ extension OTPViewController{
         }
     }
     
+    @IBAction func btnBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func otpAuthenticate(){
         let params = ["mobileno": self.mobile, "otpauthcode": self.txtOTP.text ?? ""] as [String : Any]
         LoginVM.sharedInstance.otpAuthenticateRequest(param: params)
@@ -131,10 +135,13 @@ extension OTPViewController{
             LoginVM.sharedInstance.tokenRequest()
             LoginVM.sharedInstance.tokenSuccess = {(apiToken)in
                 if otpModel.iscustomer == "0"{
-                    let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
+                    let vc = Storyboards.Main.instance.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
                     vc.mobile = self.mobile
+                    vc.isRegister = true
                     self.navigationController?.pushViewController(vc, animated: true)
                 }else{
+                    UserDefaults.standard.set(otpModel.customerid ?? "", forKey: "customerid")
+                    Globals.shared.customerId = otpModel.customerid ?? ""
                     ProfileVM.sharedInstance.vc = self
                     ProfileVM.sharedInstance.getProfile()
                     ProfileVM.sharedInstance.profileDetails = {(profileDetails) in

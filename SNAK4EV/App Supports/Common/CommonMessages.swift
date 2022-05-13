@@ -61,4 +61,6 @@ let AddressError = "Please enter your address"
 
 let PostalCodeError = "Please enter valid postal code"
 
+let TermsConditions = "Please select terms and conditions"
+
 
